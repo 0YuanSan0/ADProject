@@ -1,0 +1,11 @@
+{
+  "window_size": 5,
+  "drop_rate": 0.1,
+  "epochs": 100,
+  "batch_size": 4,
+  "validation_split": 0.1,
+  "activation": "softmax",
+  "loss": "mean_squared_error",
+  "optimizer": "Nadam",
+  "model_path": "lstm_model_basetest.h5"
+}
