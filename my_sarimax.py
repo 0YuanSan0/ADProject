@@ -2,7 +2,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 import numpy as np
 
 def sarimax_predict(train_df, test_df):
-    predict_steps = len(test_df)
+    predict_steps = len(test_df) # 预测步数
     model = SARIMAX(
         train_df.Price,
         order=(3, 0, 2),  # (p,d,q)

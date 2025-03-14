@@ -6,8 +6,13 @@ from keras import Model
 from keras.api.layers import Input, Dropout, Dense, LSTM
 from keras.api.models import load_model
 
-# 测试推送
-def process_df_for_lstm(df, window_size:int):
+"""
+自己训练自己
+分割X, Y
+用   X: [i, i + window_size -1]
+预测 Y: [i + window_size]
+"""
+def process_df_for_lstm(df, window_size: int):
     data = df.Price.values.reshape(-1, 1)
     x_data = []
     y_data = []
@@ -22,6 +27,9 @@ def process_df_for_lstm(df, window_size:int):
     return x_data, y_data
 
 
+"""
+定义模型
+"""
 def lstm_model(config):
     input1 = Input(shape=(config["window_size"], 1))
     x = LSTM(units=64, return_sequences=True)(input1)
@@ -40,8 +48,10 @@ def lstm_model(config):
     return model
 
 
-def lstm_model_predict(train_df, test_df,config_path):
-
+"""
+LSTM预测（没有训练好的模型会先训练）
+"""
+def lstm_model_predict(train_df, test_df, config_path):
     with open(config_path, encoding="UTF-8") as file:
         config = json.load(file)
 

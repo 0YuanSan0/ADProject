@@ -1,7 +1,13 @@
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 
-
+"""
+自己训练自己
+分割X, Y
+用   X: [i, i + window_size -1]
+预测 Y: [i + window_size]
+和LSTM的区别：最后X, Y的形状和LSTM最后X, Y的形状不一样
+"""
 def process_df_for_rf(df, window_size: int):
     data = df.Price.values.reshape(-1, 1)
     x_data = []
