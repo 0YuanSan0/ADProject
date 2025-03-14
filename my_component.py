@@ -6,12 +6,13 @@ from sklearn.preprocessing import MinMaxScaler
 from statsmodels.tsa.stattools import adfuller
 
 """
+ADF Score
 ADF分数
 """
 def adf_check(df_timeseries):
     prices = df_timeseries.Price
     check_result = adfuller(prices)
-    print("ADF 分数：", check_result[0])
+    print("ADF Score：", check_result[0])
     print("p-value：", check_result[1])
     for key, value in check_result[4].items():
         print(f"\t{key}: {value}")
@@ -19,6 +20,7 @@ def adf_check(df_timeseries):
 
 
 """
+Resampling monthly for comparison
 按月重新采样，用于对比
 """
 def month_resample(df_timeseries):
@@ -27,20 +29,21 @@ def month_resample(df_timeseries):
 
 
 """
+Read database, simple processing
 读取数据库，简单处理
 """
 def process_data(df_path):
     df = pd.read_csv(df_path)
     df[['Price', 'High', 'Low']] = df[['Price', 'High', 'Low']].astype(float)
-    df['Price'] = df[['Price', 'High', 'Low']].mean(axis=1)# 计算典型价格
+    df['Price'] = df[['Price', 'High', 'Low']].mean(axis=1) # Calculate typical price | 计算典型价格
 
-    df_timeseries = df[['Date', 'Price']].copy() # 只保留日期 + 典型价格
-    df_timeseries['Date'] = pd.to_datetime(df_timeseries['Date']) # 规范化日期格式
+    df_timeseries = df[['Date', 'Price']].copy() # Only reserved dates + typical prices | 只保留日期 + 典型价格
+    df_timeseries['Date'] = pd.to_datetime(df_timeseries['Date']) # Normalized date format | 规范化日期格式
     df_timeseries.sort_values(by='Date', ascending=True, inplace=True)
     df_timeseries.reset_index(drop=True, inplace=True)
-    df_timeseries.set_index('Date', inplace=True) # 将日期设置为索引
-    adf_check(df_timeseries) # ADF检测，结果是没有平稳性
-    print("数据总览：")
+    df_timeseries.set_index('Date', inplace=True) # Set the date as an index | 将日期设置为索引
+    adf_check(df_timeseries) # The ADF test showed no stationarity | ADF检测，结果是没有平稳性
+    print("Data overview: ") # 数据总览：
     show_line_chart(df_timeseries)
 
     price = df_timeseries.Price.values.reshape(-1, 1)
@@ -52,6 +55,7 @@ def process_data(df_path):
 
 
 """
+Split the training set and test set (training from 2013 to 2021, testing from 2022 to 2023)
 分割训练集和测试集（13~21年训练，22~23年测试）
 """
 def train_test_divide(sliver_df):
@@ -62,6 +66,7 @@ def train_test_divide(sliver_df):
 
 
 """
+Overview drawing
 总览绘图
 """
 def show_line_chart(df):
@@ -98,6 +103,7 @@ def evaluation_model(train_df, test_df, predict_price, scaler):
 
 
 """
+Evaluation drawing
 评估绘图
 """
 def show_line_chart_predict(train_df, test_df, predict_price):
@@ -117,12 +123,14 @@ def show_line_chart_predict(train_df, test_df, predict_price):
 
 
 """
+Evaluation scores MSE, RMSE, MAE, MAPE
 评估分数 MSE, RMSE, MAE, MAPE
 """
 def error_metrics(y_true, y_pred):
     mse = np.mean((y_true - y_pred) ** 2)
     rmse = np.sqrt(mse)
     mae = np.mean(np.abs(y_true - y_pred))
+    # If there are zero values in y_true, calculate MAPE after filtering out the zero values
     # 处理 y_true 中存在零值的情况，过滤掉零值后计算 MAPE
     non_zero_indices = y_true != 0
     if np.any(non_zero_indices):

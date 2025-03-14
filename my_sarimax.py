@@ -13,8 +13,8 @@ def sarimax_predict(train_df, test_df):
     results = model.fit()
     results.summary()
 
-    # 预测未来
+    # Predict the future | 预测未来
     forecast = results.get_forecast(steps=predict_steps)
-    # 获取预测的均值
+    # Get the mean of the predictions | 获取预测的均值
     y_pred  = np.array(forecast.predicted_mean).astype('float64')
     return y_pred

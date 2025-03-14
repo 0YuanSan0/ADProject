@@ -5,10 +5,10 @@ from my_component import evaluation_model
 
 def predict(df, scaler):
     train_df, test_df = my_component.train_test_divide(df)
-    print("LSTM模型推理：")
+    print("LSTM model predicts:") # LSTM模型预测：
     lstm_predict = lstm_model_predict(train_df.copy(), test_df.copy(), "Config/lstm_config.json")
     evaluation_model(train_df.copy(), test_df.copy(), lstm_predict, scaler)
-    print("随机森林模型推理：")
+    print("Random forest model predicts:") # 随机森林模型推理：
     _rf_predict = rf_predict(train_df.copy(), test_df.copy(), 60, 100)
     evaluation_model(train_df.copy(), test_df.copy(), _rf_predict, scaler)
 

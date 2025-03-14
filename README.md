@@ -58,13 +58,14 @@ Ensure that the project documents are organized as above
    ```
     example:
    ```pseudocode
-   ADF 分数： -1.998805019481718
+   ADF Score： -1.998805019481718
    p-value： 0.2870973021664973
    	1%: -3.4329569285480814
    	5%: -2.862691729403106
    	10%: -2.5673831097880595
-   数据总览：
-   SARIMX模型测试：
+   	
+   Data overview: 
+   SARIMX model test: 
    
    * * *
    
@@ -92,23 +93,22 @@ Ensure that the project documents are organized as above
    MAE: 2.03348268790561
    MAPE: 9.185571379236178%
    
-   
-   LSTM模型测试：
-   加载已训练模型，直接进行推理
-   开始推理
+   LSTM model test: 
+   Load the trained model and make predictions directly
    WARNING:absl:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
-   1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 260ms/step - loss: 0.0126
-   1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 154ms/step
+   Start prediction
+   1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 269ms/step - loss: 0.0126
+   1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 160ms/step
    MSE: 2.814691921732139
    RMSE: 1.6777043606464574
    MAE: 1.1928762556950705
    MAPE: 5.414655031603418%
    
-   随机森林模型测试：
-   MSE: 1.9113858061448163
-   RMSE: 1.3825287722665363
-   MAE: 0.9933112261289953
-   MAPE: 4.559875702334848%
+   Random forest model test: 
+   MSE: 1.8420709442734018
+   RMSE: 1.35722914213975
+   MAE: 0.9724879276180595
+   MAPE: 4.509984320958819%
    ```
    
 4. Finally Prediction
@@ -118,26 +118,28 @@ Ensure that the project documents are organized as above
    ```
    example:
    ```pseudocode
-	ADF 分数： -1.998805019481718
+	ADF Score： -1.998805019481718
    p-value： 0.2870973021664973
    	1%: -3.4329569285480814
    	5%: -2.862691729403106
    	10%: -2.5673831097880595
-   数据总览：
-   LSTM模型推理：
-   加载已训练模型，直接进行推理
+   Data overview: 
+   
+   LSTM model predicts:
+   Load the trained model and make predictions directly
+   Start prediction
    WARNING:absl:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
-   开始推理
    11/11 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - loss: 0.0012
-   11/11 ━━━━━━━━━━━━━━━━━━━━ 0s 23ms/step
+   11/11 ━━━━━━━━━━━━━━━━━━━━ 0s 26ms/step
    MSE: 0.23990032952399362
    RMSE: 0.4897962122393288
    MAE: 0.3603175473306691
    MAPE: 1.6213904800117331%
-   随机森林模型推理：
-   MSE: 0.1398204970115734
-   RMSE: 0.3739257907815044
-   MAE: 0.27258595588235207
-   MAPE: 1.2387041303433666%
+   
+   Random forest model predicts:
+   MSE: 0.1327424226438721
+   RMSE: 0.3643383354025103
+   MAE: 0.2672275408496724
+   MAPE: 1.2133067794967076%
    ```
 

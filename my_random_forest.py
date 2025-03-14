@@ -2,6 +2,12 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 
 """
+Self Train
+Divide X, Y
+Use X: [i, i + window_size-1]
+Prediction Y: [i + window_size]
+Difference between LSTM and LSTM: The shape of the final X, Y is not the same as the shape of the final X, Y of LSTM
+
 自己训练自己
 分割X, Y
 用   X: [i, i + window_size -1]
