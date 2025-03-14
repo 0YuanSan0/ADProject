@@ -84,22 +84,23 @@ def show_line_chart(df):
 
 
 """
+Evaluation result
 评估结果
 """
 def evaluation_model(train_df, test_df, predict_price, scaler):
-    # 反向Min-Max，将数据从0~1放缩回原来的大小
+    # Inverse Min-Max: shrinks data from 0 to 1 back to the original size | 反向Min-Max，将数据从0~1放缩回原来的大小
     train_df.loc[:, "Price"] = scaler.inverse_transform(train_df.Price.values.reshape(-1, 1)).flatten()
     test_df.loc[:, "Price"] = scaler.inverse_transform(test_df.Price.values.reshape(-1, 1)).flatten()
     predict_price = scaler.inverse_transform(predict_price.reshape(-1, 1)).flatten()
 
-    # 用真值填充预测空窗口
+    # Fill the empty prediction window with truth values | 用真值填充预测空窗口
     if len(test_df) > len(predict_price):
         predict_price = np.concatenate((test_df[:-len(predict_price)].Price.values,
                                     predict_price), axis=0)
 
 
-    error_metrics(test_df.Price.values, predict_price) # 分数评估
-    show_line_chart_predict(train_df, test_df, predict_price) # 可视化评估
+    error_metrics(test_df.Price.values, predict_price) # Score evaluation | 分数评估
+    show_line_chart_predict(train_df, test_df, predict_price) # Visual evaluation | 可视化评估
 
 
 """
