@@ -6,7 +6,7 @@
 root
   ├ Config
   │   ├ lstm_basetest_config.json
-  │	  └ lstm_config.json
+  │   └ lstm_config.json
   │
   ├ Dataset
   │	  └ SilverPrices.csv
@@ -118,7 +118,7 @@ Ensure that the project documents are organized as above
    ```
    example:
    ```pseudocode
-	ADF Score： -1.998805019481718
+   ADF Score： -1.998805019481718
    p-value： 0.2870973021664973
    	1%: -3.4329569285480814
    	5%: -2.862691729403106
