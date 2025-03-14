@@ -21,7 +21,7 @@ root
   ├ test_compare.py
   ├ predict.py
   │
-  └
+  └ requirements.txt
 ```
 + **Config**:
   + lstm_basetest_config.json: Configuration of the LSTM model during comparison testing.
