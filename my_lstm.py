@@ -6,7 +6,7 @@ from keras import Model
 from keras.api.layers import Input, Dropout, Dense, LSTM
 from keras.api.models import load_model
 
-
+# 测试推送
 def process_df_for_lstm(df, window_size:int):
     data = df.Price.values.reshape(-1, 1)
     x_data = []
